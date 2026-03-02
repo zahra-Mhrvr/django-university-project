@@ -1,0 +1,80 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<form method="get">
+
+    <!-- Search box -->
+    <input type="text" 
+           name="q" 
+           placeholder="Search by name"
+           value="{{ request.GET.q|default:'' }}">
+
+    <!-- Course filter dropdown -->
+    <select name="course">
+        <option value="">All Courses</option>
+        {% for course in courses %}
+            <option value="{{ course.id }}" {% if request.GET.course == course.id|stringformat:"s" %}selected{% endif %}>
+                {{ course.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Category filter dropdown -->
+    <select name="category">
+        <option value="" {% if not request.GET.category %}selected{% endif %}>All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.name }}" {% if request.GET.category == cat.name %}selected{% endif %}>
+                {{ cat.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+<h2>Student List</h2>
+
+<ul>
+    {% for student in students %}
+        <li>
+            {{ student.student_id }} —
+            {{ student.first_name }} {{ student.last_name }}
+
+            {% if perms.students.change_student %}
+                <a href="{% url 'edit_student' student.id %}">Edit</a>
+            {% endif %}
+
+            {% if perms.students.delete_student %}
+                <a href="{% url 'delete_student' student.id %}">Delete</a>
+            {% endif %}
+
+            <ul>
+                {% for course in student.courses.all %}
+                    <li>{{ course.code }} - {{ course.name }}</li>
+                {% empty %}
+                    <li>No enrolled courses</li>
+                {% endfor %}
+            </ul>
+
+        </li>
+    {% empty %}
+        <li>No students found.</li>
+    {% endfor %}
+
+    {% if is_paginated %}
+<div style="margin-top:20px;">
+    {% with request.GET.urlencode as query_params %}
+        {% if page_obj.has_previous %}
+            <a href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endif %}
+</ul>
+
+{% endblock %}

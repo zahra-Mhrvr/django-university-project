@@ -1,0 +1,17 @@
+<!-- students/templates/registration/login.html -->
+{% extends 'students/base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Login</button>
+</form>
+
+{% if form.errors %}
+    <p style="color:rgb(214, 19, 19);">Invalid username or password</p>
+{% endif %}
+{% endblock %}
