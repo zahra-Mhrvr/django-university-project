@@ -7,6 +7,12 @@ from .views import (
     StudentUpdateView,
     StudentDeleteView,
 )
+from .api_views import (
+    StudentListAPI,
+    StudentDetailAPI,
+    CourseListAPI,
+    CourseDetailAPI
+)
 
 urlpatterns = [
     path('students/', StudentListView.as_view(), name='student_list'),
@@ -17,4 +23,16 @@ urlpatterns = [
 
     path('students/<int:pk>/edit/', StudentUpdateView.as_view(), name='edit_student'),
     path('students/<int:pk>/delete/', StudentDeleteView.as_view(), name='delete_student'),
+]
+
+urlpatterns += [
+
+    path('api/students/', StudentListAPI.as_view(), name='api_students'),
+
+    path('api/students/<int:pk>/', StudentDetailAPI.as_view(), name='api_student_detail'),
+
+    path('api/courses/', CourseListAPI.as_view(), name='api_courses'),
+
+    path('api/courses/<int:pk>/', CourseDetailAPI.as_view(), name='api_course_detail'),
+
 ]
