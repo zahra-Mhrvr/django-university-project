@@ -1,6 +1,6 @@
 from rest_framework import generics
 
-from university_project.students.models import Student, Course
+from .models import Student, Course
 from .serializers import StudentSerializer, CourseSerializer
 
 class StudentListAPI(generics.ListCreateAPIView):
