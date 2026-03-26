@@ -8,27 +8,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('students', '0005_alter_student_courses'),
+        ("students", "0005_alter_student_courses"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='student',
-            options={'ordering': [django.db.models.functions.text.Lower('last_name'), django.db.models.functions.text.Lower('first_name')]},
+            name="student",
+            options={
+                "ordering": [
+                    django.db.models.functions.text.Lower("last_name"),
+                    django.db.models.functions.text.Lower("first_name"),
+                ]
+            },
         ),
         migrations.AlterField(
-            model_name='course',
-            name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='students.category'),
+            model_name="course",
+            name="category",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="students.category"
+            ),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='code',
+            model_name="course",
+            name="code",
             field=models.CharField(max_length=20, unique=True),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='name',
+            model_name="course",
+            name="name",
             field=models.CharField(max_length=200),
         ),
     ]

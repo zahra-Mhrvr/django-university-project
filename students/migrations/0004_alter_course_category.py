@@ -7,13 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('students', '0003_category_alter_course_category'),
+        ("students", "0003_category_alter_course_category"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='course',
-            name='category',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='students.category'),
+            model_name="course",
+            name="category",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.SET_DEFAULT,
+                to="students.category",
+            ),
         ),
     ]

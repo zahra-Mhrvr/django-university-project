@@ -7,7 +7,7 @@ from .serializers import (
     StudentSerializer,
     CourseSerializer,
     ProfessorSerializer,
-    CategorySerializer
+    CategorySerializer,
 )
 
 
@@ -21,24 +21,14 @@ class StudentViewSet(viewsets.ModelViewSet):
     filter_backends = [
         filters.SearchFilter,
         filters.OrderingFilter,
-        DjangoFilterBackend
+        DjangoFilterBackend,
     ]
 
-    search_fields = [
-        'first_name',
-        'last_name',
-        'student_id'
-    ]
+    search_fields = ["first_name", "last_name", "student_id"]
 
-    ordering_fields = [
-        'first_name',
-        'last_name',
-        'student_id'
-    ]
+    ordering_fields = ["first_name", "last_name", "student_id"]
 
-    filterset_fields = [
-        'student_id'
-    ]
+    filterset_fields = ["student_id"]
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -48,20 +38,11 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
 
-    filter_backends = [
-        filters.SearchFilter,
-        filters.OrderingFilter
-    ]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
 
-    search_fields = [
-        'name',
-        'code'
-    ]
+    search_fields = ["name", "code"]
 
-    ordering_fields = [
-        'name',
-        'code'
-    ]
+    ordering_fields = ["name", "code"]
 
 
 class ProfessorViewSet(viewsets.ModelViewSet):
@@ -71,20 +52,11 @@ class ProfessorViewSet(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
 
-    filter_backends = [
-        filters.SearchFilter,
-        filters.OrderingFilter
-    ]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
 
-    search_fields = [
-        'first_name',
-        'last_name'
-    ]
+    search_fields = ["first_name", "last_name"]
 
-    ordering_fields = [
-        'first_name',
-        'last_name'
-    ]
+    ordering_fields = ["first_name", "last_name"]
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -94,15 +66,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
 
-    filter_backends = [
-        filters.SearchFilter,
-        filters.OrderingFilter
-    ]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
 
-    search_fields = [
-        'name'
-    ]
+    search_fields = ["name"]
 
-    ordering_fields = [
-        'name'
-    ]
+    ordering_fields = ["name"]
